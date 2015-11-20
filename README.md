@@ -1,6 +1,7 @@
 # ezec: Easy Interface to Effective Concentration Calculations
 
 [![Travis-CI Build Status](https://travis-ci.org/grunwaldlab/ezec.svg?branch=master)](https://travis-ci.org/grunwaldlab/ezec)
+[![Coverage Status](https://coveralls.io/repos/grunwaldlab/ezec/badge.svg?branch=master&service=github)](https://coveralls.io/github/grunwaldlab/ezec?branch=master)
 
 Because fungicide resistance is an important phenotypic trait for fungi and
 oomycetes, it is necessary to have a standardized method of statistically
