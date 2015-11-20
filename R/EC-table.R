@@ -63,7 +63,7 @@ EC_table <- function(x, form = NULL, model = "LL.3",
 
   rownames(EC) <- models[[idcol]]
   if (plot){
-    models %>% dplyr::do(dump = ~tryplot(.))
+    models %>% dplyr::do_(dump = ~tryplot(.))
   }
   if (result == "df"){
     return(as.data.frame(EC))
