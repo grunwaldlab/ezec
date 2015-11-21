@@ -1,0 +1,112 @@
+---
+title: "Getting Started with EZEC"
+author: "Zhian N. Kamvar"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, echo = FALSE, message = FALSE, warning = FALSE}
+knitr::opts_chunk$set(message = FALSE, warning = FALSE, tidy = FALSE)
+knitr::opts_chunk$set(fig.align = "center", fig.show = 'asis', fig.height = 5,
+                      fig.width = 5)
+options(out.width = 100)
+```
+
+Welcome
+=======
+
+Introduction
+------------
+
+The package EZEC stands for Easy Effective Concentration. This package was 
+designed to be a simple wrapper for the functions `drm()` and `ED()` in the 
+[*drc*](http://cran.r-project.org/package=drc) package. It provides the function
+`EC_table()` that will first fit a model to your data and then calculate
+effective concentrations from that model over several samples arranged in a data
+frame. In this tutorial, I will give a couple of short examples of how you can 
+analyze your data. To get help with any functions in the package, simply type
+`help("function.name")` and replace function.name with the name of the function
+you want help for.
+
+Credit
+------
+
+As this package is simply a wrapper to two functions from the *drc* package,
+please cite the drc package and indicate the version number you used:
+
+```{r}
+packageVersion("drc")
+citation("drc")
+```
+
+
+Data Format
+===========
+
+Your data must be in a format that encodes one observation per row. You can see
+an example of this in the `dummydata` data set:
+
+
+```{r, dummydata}
+library("ezec")
+data("dummydata", library = "ezec")
+head(dummydata) # the function head means "look at the top of the object"
+```
+
+You can see that this contains the columns `r paste(names(dummydata), collapse =
+", ")`. The only important columns here are the **ID**, **dose**, and
+**response** columns. 
+
+To import your own data from csv text file, you should use the function
+`read.table()` to import it into R. If you want to import data from an xlsx
+file, you can use the function `read_excel()` from the *readxl* package.
+
+Data Analysis
+=============
+
+You can analyze your data simply by running `EC_table()` with your data and
+supplying a formula to describe what you want to analyze in the form of
+`response_variable ~ explanitory_variable`. In our example of "dummydata", our
+response variable is "response" and our explanitory variable is "dose".
+
+```{r, ec_table}
+library("ezec")
+data(dummydata)
+res <- EC_table(dummydata, form = response ~ dose)
+print(res)
+```
+
+If you want to have all the plots plotted in one window, you can use the `par()`
+function:
+
+```{r, ec_table_par, fig.width = 7, fig.height = 4}
+par(mfrow = c(1, 2)) # set window to have 1 row and two columns
+EC_table(dummydata, form = response ~ dose)
+par(mfrow = c(1, 1)) # reset the window
+```
+
+Output: model summary
+---------------------
+
+You can also have the output be a summary of the model for each sample as a list
+
+```{r}
+EC_table(dummydata, form = response ~ dose, plot = FALSE, result = "summary")
+```
+
+Output: model
+-------------
+
+You can also choose to have the output be the model itself
+
+
+```{r}
+EC_table(dummydata, form = response ~ dose, plot = FALSE, result = "model")
+```
+
+
+

@@ -14,5 +14,5 @@ entire set of isolates using the drc package.
 You can install this package from GitHub using devtools:
 
 ```r
-devtools::install_github("grunwaldlab/ezec")
+devtools::install_github("grunwaldlab/ezec", build_vignettes = TRUE)
 ```
