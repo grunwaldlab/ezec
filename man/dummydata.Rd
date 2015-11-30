@@ -4,9 +4,9 @@
 \name{dummydata}
 \alias{dummydata}
 \title{dummydata}
-\format{a data frame with 96 rows and 7 columns representing two isolates 
+\format{a data frame with 96 rows and 7 columns representing two isolates
   tested for Metalaxyl resistance over 6 concentrations with 8 replicates per
-  concentration. Each rep number were conducted in separate weeks. The First 
+  concentration. Each rep number were conducted in separate weeks. The First
   sample is real and the second is fake.}
 \usage{
 data(dummydata)
