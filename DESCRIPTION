@@ -1,6 +1,6 @@
 Package: ezec
 Title: Easy Interface to Effective Concentration Calculations
-Version: 0.0.0.9000
+Version: 0.1.0
 Authors@R: c(person(c("Zhian", "N."), "Kamvar", role = c("cre", "aut"), email =
          "kamvarz@science.oregonstate.edu"),
          person(c("Niklaus", "J."), "Grunwald", role = c("ths", "ctb"), email =
@@ -11,14 +11,14 @@ Description: Because fungicide resistance is an important phenotypic trait for
     statistically analyzing the Effective Concentration (EC) values. This
     package is designed for those who are not terribly familiar with R to be
     able to analyze and plot an entire set of isolates using the drc package.
-Depends: 
+Depends:
     R (>= 3.2.0)
-Imports: 
+Imports:
     drc,
     dplyr
 License: GPL-3
 LazyData: true
-Suggests: 
+Suggests:
     testthat,
     readxl,
     knitr,
