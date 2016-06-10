@@ -53,7 +53,7 @@ an example of this in the `dummydata` data set:
 
 ```{r, dummydata}
 library("ezec")
-data("dummydata", library = "ezec")
+data("dummydata", package = "ezec")
 head(dummydata) # the function head means "look at the top of the object"
 ```
 

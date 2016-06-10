@@ -45,7 +45,7 @@ EC_table <- function(x, form = NULL, model = "LL.3",
   } else {
     dat <- x
   }
-  variables_exist <- all.vars(form) %in% names(x)
+  variables_exist <- all.vars(form) %in% names(dat)
   if (!all(variables_exist)){
   	dat  <- paste(names(x), collapse = ", ")
     formsg  <- utils::capture.output(print(form))
@@ -59,16 +59,16 @@ EC_table <- function(x, form = NULL, model = "LL.3",
     dplyr::do_(model = ~get_drm(., model = model, form = form, idcol = idcol))
 
   EC <- models %>%
-    dplyr::do_(~get_EC(.$mod, response, disp = FALSE))
+    dplyr::do_(~get_EC(.$model, response, disp = FALSE))
 
-  rownames(EC) <- models[[idcol]]
+  EC <- dplyr::data_frame(sample = models[[idcol]]) %>% dplyr::bind_cols(EC)
   if (plot){
     models %>% dplyr::do_(dump = ~tryplot(.))
   }
   if (result == "df"){
-    return(as.data.frame(EC))
+    return(EC)
   } else {
-    res <- models$mod
+    res <- models$model
     names(res) <- models[[idcol]]
     if (result == "summary"){
       res <- lapply(res, summary)
