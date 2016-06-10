@@ -5,15 +5,16 @@ NEW FEATURES
 ----------
 
 * results returned as a `tbl_df` from the dplyr package.
-* resulting data frame gains a column defining the sample names instead of using
-  the "rownames" attribute (This was addressed in part for
-  https://github.com/grunwaldlab/ezec/issues/3)
+* The data frame produced via `EC_table()`gains a column defining the sample
+  names instead of using the "rownames" attribute (This was addressed in part
+  for https://github.com/grunwaldlab/ezec/issues/3). This is considered a
+  breaking change.
 
 BUG FIX
 ----------
 
 * samples with insufficient data no longer throw an error when running
-  `EC_table` without three response levels
+  `EC_table()` without three response levels
 * Vignette is no longer titled "Vignette Title"
 
 
