@@ -45,3 +45,12 @@ test_that("EC_table can read files", {
   res <- EC_table(tmp, form = response ~ dose, sep = ",")
   expect_equivalent(res %>% data.frame, expected %>% data.frame)
 })
+
+test_that("Insufficient data is handled well", {
+  whadat <- dummydata %>%
+    filter(ID == "Sample2") %>%
+    mutate(ID = "wha", response = 0L) %>%
+    bind_rows(dummydata)
+  expect_output(whares <- EC_table(whadat, form = response ~ dose, response = 50, model = "LL.4"), "Not evaluated: wha")
+  expect_equal(dim(whares), c(3L, 3L))
+})
