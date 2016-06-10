@@ -41,7 +41,7 @@ EC_table <- function(x, form = NULL, model = "LL.3",
   }
   result <- match.arg(result, RESARGS)
   if (!is.data.frame(x)){
-    dat <- read.table(x, header = TRUE, ...)
+    dat <- read.table(x, header = TRUE, stringsAsFactors = FALSE, ...)
   } else {
     dat <- x
   }
