@@ -14,6 +14,7 @@ BUG FIX
 
 * samples with insufficient data no longer throw an error when running
   `EC_table` without three response levels
+* Vignette is no longer titled "Vignette Title"
 
 
 ezec 0.1.0

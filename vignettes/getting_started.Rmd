@@ -51,7 +51,7 @@ Your data must be in a format that encodes one observation per row. You can see
 an example of this in the `dummydata` data set:
 
 
-```{r, dummydata}
+```{r dummydata}
 library("ezec")
 data("dummydata", package = "ezec")
 head(dummydata) # the function head means "look at the top of the object"
@@ -73,9 +73,9 @@ supplying a formula to describe what you want to analyze in the form of
 `response_variable ~ explanitory_variable`. In our example of "dummydata", our
 response variable is "response" and our explanitory variable is "dose".
 
-```{r, ec_table}
+```{r ec_table}
 library("ezec")
-data(dummydata)
+data("dummydata", package = "ezec")
 res <- EC_table(dummydata, form = response ~ dose)
 print(res)
 ```
@@ -83,10 +83,20 @@ print(res)
 If you want to have all the plots plotted in one window, you can use the `par()`
 function:
 
-```{r, ec_table_par, fig.width = 7, fig.height = 4}
+```{r ec_table_par, fig.width = 7, fig.height = 4}
 par(mfrow = c(1, 2)) # set window to have 1 row and two columns
 EC_table(dummydata, form = response ~ dose)
 par(mfrow = c(1, 1)) # reset the window
+```
+
+Saving your results to a file
+-----------------------------
+
+If you want to save your results to a file that you can format for a manuscript,
+you can use the `write.table()` functon:
+
+```{r write, eval = FALSE}
+write.table(res, file = "dummy_results.csv", row.names = FALSE, sep = ",")
 ```
 
 Output: model summary
