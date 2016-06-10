@@ -1,0 +1,22 @@
+ezec 1.0.0
+==========
+
+NEW FEATURES
+----------
+
+* results returned as a `tbl_df` from the dplyr package.
+* resulting data frame gains a column defining the sample names instead of using
+  the "rownames" attribute (This was addressed in part for
+  https://github.com/grunwaldlab/ezec/issues/3)
+
+BUG FIX
+----------
+
+* samples with insufficient data no longer throw an error when running
+  `EC_table` without three response levels
+
+
+ezec 0.1.0
+==========
+
+initial version of ezec
