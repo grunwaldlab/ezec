@@ -1,3 +1,6 @@
+# Suppress R CMD check NOTE for column name used in tidyr::nest()
+utils::globalVariables("data")
+
 #' Function to generate a table of EC values from a data frame of multiple
 #' isolates.
 #'
@@ -55,15 +58,25 @@ EC_table <- function(x, form = NULL, model = "LL.3",
     stop(msg)
   }
   models <- dat %>%
-    dplyr::group_by_(idcol) %>%
-    dplyr::do_(model = ~get_drm(., model = model, form = form, idcol = idcol))
+    tidyr::nest(.by = dplyr::all_of(idcol)) |>
+    dplyr::mutate(model = mapply(
+      function(d, id_val) {
+        # Add column back
+        d[[idcol]] <- id_val
+        get_drm(d, model = model, form = form, idcol = idcol)
+      }, 
+      data, 
+      .data[[idcol]], 
+      SIMPLIFY = FALSE
+    ))
 
-  EC <- models %>%
-    dplyr::do_(~get_EC(.$model, response, disp = FALSE))
+  EC <- dplyr::bind_rows(!!!lapply(models$model, function(m) get_EC(m, response, disp = FALSE)))
 
-  EC <- dplyr::data_frame(sample = models[[idcol]]) %>% dplyr::bind_cols(EC)
+  EC <- dplyr::tibble(sample = models[[idcol]]) %>% dplyr::bind_cols(EC)
   if (plot){
-    models %>% dplyr::do_(dump = ~tryplot(.))
+    for (i in seq_len(nrow(models))) {
+      tryplot(list(models[[idcol]][i], model = models$model[[i]]))
+    }
   }
   if (result == "df"){
     return(EC)

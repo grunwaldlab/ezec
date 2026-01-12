@@ -15,7 +15,8 @@ Depends:
     R (>= 3.2.0)
 Imports:
     drc,
-    dplyr
+    dplyr,
+    tidyr
 License: GPL-3
 URL: https://github.com/grunwaldlab/ezec
 BugReports: https://github.com/grunwaldlab/ezec/issues
