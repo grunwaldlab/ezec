@@ -65,22 +65,23 @@ EC_table <- function(
     )
     stop(msg)
   }
-  models <- dat %>%
-    dplyr::group_by_(idcol) %>%
-    dplyr::do_(model = ~ get_drm(., model = model, form = form, idcol = idcol))
+  models <- split(dat, dat[[idcol]]) %>%
+    lapply(
+      get_drm,
+      model = model,
+      form = form,
+      idcol = idcol
+    )
+  results <- lapply(models, get_EC, response = response, disp = FALSE)
+  EC <- dplyr::bind_rows(results, .id = "sample")
 
-  EC <- models %>%
-    dplyr::do_(~ get_EC(.$model, response, disp = FALSE))
-
-  EC <- dplyr::data_frame(sample = models[[idcol]]) %>% dplyr::bind_cols(EC)
   if (plot) {
-    models %>% dplyr::do_(dump = ~ tryplot(.))
+    lapply(models, tryplot)
   }
   if (result == "df") {
     return(EC)
   } else {
-    res <- models$model
-    names(res) <- models[[idcol]]
+    res <- models
     if (result == "summary") {
       res <- lapply(res, summary)
     }
@@ -90,8 +91,8 @@ EC_table <- function(
 
 # internal plotting
 tryplot <- function(x) {
-  if (length(x$model) > 0) {
-    plot(x$model, broken = TRUE, type = "all", main = x[[1]])
+  if (length(x) > 0) {
+    plot(x, broken = TRUE, type = "all", main = x[[1]])
   } else {
     plot.new()
     text(

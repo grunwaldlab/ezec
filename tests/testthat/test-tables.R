@@ -43,7 +43,6 @@ test_that("EC 50 results are correct", {
 
   expect_equivalent(res %>% data.frame, expected %>% data.frame)
   expect_that(res, is_a("data.frame"))
-  expect_that(res, is_a("tbl_df"))
   expect_that(res_mod[[1]], is_a("drc"))
   expect_that(res_sum[[1]], is_a("summary.drc"))
 })

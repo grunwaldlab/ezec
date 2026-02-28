@@ -32,7 +32,7 @@ Useful links:
 
 }
 \author{
-\strong{Maintainer}: Zhian N. Kamvar \email{kamvarz@science.oregonstate.edu}
+\strong{Maintainer}: Zhian N. Kamvar \email{zkamvar@gmail.com}
 
 Other contributors:
 \itemize{

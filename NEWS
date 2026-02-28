@@ -1,3 +1,11 @@
+ezec 1.0.1
+==========
+
+CRAN MAINTENANCE
+----------------
+
+* old dplyr patterns have been deprecated
+
 ezec 1.0.0
 ==========
 
@@ -21,4 +29,4 @@ BUG FIX
 ezec 0.1.0
 ==========
 
-initial version of ezec
+* initial version of ezec

@@ -41,7 +41,7 @@ get_drm <- function(
     msg <- paste("please supply a formula.\n\nExample:\n\t", the_call)
     stop(msg)
   }
-  MODEL <- match.fun(model)
+  MODEL <- get(model, envir = asNamespace("drc"))
   res <- tryCatch(
     drc::drm(
       form,
