@@ -5,8 +5,16 @@
 \title{Function to generate a table of EC values from a data frame of multiple
 isolates.}
 \usage{
-EC_table(x, form = NULL, model = "LL.3", response = c(10, 50, 90),
-  idcol = "ID", result = "df", plot = TRUE, ...)
+EC_table(
+  x,
+  form = NULL,
+  model = "LL.3",
+  response = c(10, 50, 90),
+  idcol = "ID",
+  result = "df",
+  plot = TRUE,
+  ...
+)
 }
 \arguments{
 \item{x}{a data frame that has at least the columns listed in the \code{form}
@@ -63,4 +71,3 @@ EC_table(newdat, form = growth ~ dosage, idcol = "identity")
 \author{
 Zhian N. Kamvar
 }
-

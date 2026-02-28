@@ -28,63 +28,78 @@
 #' # We can rename them, too.
 #' colnames(newdat) <- c("identity", "dosage", "growth")
 #' EC_table(newdat, form = growth ~ dosage, idcol = "identity")
-EC_table <- function(x, form = NULL, model = "LL.3",
-                     response = c(10, 50, 90), idcol = "ID",
-                     result = "df", plot = TRUE, ...){
+EC_table <- function(
+  x,
+  form = NULL,
+  model = "LL.3",
+  response = c(10, 50, 90),
+  idcol = "ID",
+  result = "df",
+  plot = TRUE,
+  ...
+) {
   RESARGS <- c("df", "model", "summary")
-  if (is.null(form)){
-  	the_call <- match.call()
-  	the_call[["form"]] <- response ~ dose
-  	the_call <- utils::capture.output(print(the_call))
-  	msg <- paste("please supply a formula.\n\nExample:\n\t", the_call)
+  if (is.null(form)) {
+    the_call <- match.call()
+    the_call[["form"]] <- response ~ dose
+    the_call <- utils::capture.output(print(the_call))
+    msg <- paste("please supply a formula.\n\nExample:\n\t", the_call)
     stop(msg)
   }
   result <- match.arg(result, RESARGS)
-  if (!is.data.frame(x)){
+  if (!is.data.frame(x)) {
     dat <- read.table(x, header = TRUE, stringsAsFactors = FALSE, ...)
   } else {
     dat <- x
   }
   variables_exist <- all.vars(form) %in% names(dat)
-  if (!all(variables_exist)){
-  	dat  <- paste(names(x), collapse = ", ")
-    formsg  <- utils::capture.output(print(form))
-    msg <- paste("\n\nYou have the following variables in your data:\n\t", dat,
-    						 "\n\nThe formula you supplied does not match:\n\t", formsg,
-    						 "\n\nPlease correct the formula argument and try again")
+  if (!all(variables_exist)) {
+    dat <- paste(names(x), collapse = ", ")
+    formsg <- utils::capture.output(print(form))
+    msg <- paste(
+      "\n\nYou have the following variables in your data:\n\t",
+      dat,
+      "\n\nThe formula you supplied does not match:\n\t",
+      formsg,
+      "\n\nPlease correct the formula argument and try again"
+    )
     stop(msg)
   }
   models <- dat %>%
     dplyr::group_by_(idcol) %>%
-    dplyr::do_(model = ~get_drm(., model = model, form = form, idcol = idcol))
+    dplyr::do_(model = ~ get_drm(., model = model, form = form, idcol = idcol))
 
   EC <- models %>%
-    dplyr::do_(~get_EC(.$model, response, disp = FALSE))
+    dplyr::do_(~ get_EC(.$model, response, disp = FALSE))
 
   EC <- dplyr::data_frame(sample = models[[idcol]]) %>% dplyr::bind_cols(EC)
-  if (plot){
-    models %>% dplyr::do_(dump = ~tryplot(.))
+  if (plot) {
+    models %>% dplyr::do_(dump = ~ tryplot(.))
   }
-  if (result == "df"){
+  if (result == "df") {
     return(EC)
   } else {
     res <- models$model
     names(res) <- models[[idcol]]
-    if (result == "summary"){
+    if (result == "summary") {
       res <- lapply(res, summary)
     }
     return(res)
   }
-
 }
 
 # internal plotting
-tryplot <- function(x){
-  if (length(x$model) > 0){
+tryplot <- function(x) {
+  if (length(x$model) > 0) {
     plot(x$model, broken = TRUE, type = "all", main = x[[1]])
   } else {
     plot.new()
-    text(x = 0.5, y = 0.5, paste0(x[[1]], "\n", "Insufficient data"), cex = 1.6,
-         col = "black")
+    text(
+      x = 0.5,
+      y = 0.5,
+      paste0(x[[1]], "\n", "Insufficient data"),
+      cex = 1.6,
+      col = "black"
+    )
   }
 }

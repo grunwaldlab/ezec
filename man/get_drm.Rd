@@ -4,8 +4,12 @@
 \alias{get_drm}
 \title{Function to generate a dose-response model from a data frame.}
 \usage{
-get_drm(x, form = NULL, model = c("LL.3", "LL.4", "W1.4", "W2.4"),
-  idcol = "ID")
+get_drm(
+  x,
+  form = NULL,
+  model = c("LL.3", "LL.4", "W1.4", "W2.4"),
+  idcol = "ID"
+)
 }
 \arguments{
 \item{x}{a data frame that has at least the columns listed in the \code{form}
@@ -37,4 +41,3 @@ A wrapper function for \code{\link[drc]{drm}}, this will attempt to
 Zhian N. Kamvar
 }
 \keyword{internal}
-

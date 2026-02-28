@@ -11,10 +11,10 @@
 #'  value.
 #' @export
 #' @author Zhian N. Kamvar
-get_EC <- function(x, response = c(10, 50, 90), disp = TRUE){
+get_EC <- function(x, response = c(10, 50, 90), disp = TRUE) {
   resnames <- c("Estimate", "SE")
-  if (length(x) < 1){
-    res <- matrix(as.numeric(NA), nrow = 1, ncol = length(response)*2)
+  if (length(x) < 1) {
+    res <- matrix(as.numeric(NA), nrow = 1, ncol = length(response) * 2)
   } else {
     res <- drc::ED(x, respLev = response, display = disp)
     res <- matrix(t(res), nrow = 1)

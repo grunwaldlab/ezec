@@ -12,12 +12,11 @@
 #'   is \code{\link{dummydata}}.
 #'
 #' @name ezec
-#' @docType package
 #' @import dplyr drc
 #' @importFrom graphics plot plot.new text
 #' @importFrom stats na.omit
 #' @importFrom utils read.table
-NULL
+"_PACKAGE"
 
 #' dummydata
 #'

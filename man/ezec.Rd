@@ -2,11 +2,11 @@
 % Please edit documentation in R/ezec-package.r
 \docType{package}
 \name{ezec}
-\alias{ezec}
 \alias{ezec-package}
+\alias{ezec}
 \title{The \pkg{ezec} package for easy EC calculation.}
 \description{
-The \pkg{ezec} package for easy EC calculation.
+Because fungicide resistance is an important phenotypic trait for fungi and oomycetes, it is necessary to have a standardized method of statistically analyzing the Effective Concentration (EC) values. This package is designed for those who are not terribly familiar with R to be able to analyze and plot an entire set of isolates using the 'drc' package.
 }
 \section{Introduction}{
  The package \pkg{ezec} is not a revolutionary work. It
@@ -23,3 +23,20 @@ The \pkg{ezec} package for easy EC calculation.
   is \code{\link{dummydata}}.
 }
 
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://github.com/grunwaldlab/ezec}
+  \item Report bugs at \url{https://github.com/grunwaldlab/ezec/issues}
+}
+
+}
+\author{
+\strong{Maintainer}: Zhian N. Kamvar \email{kamvarz@science.oregonstate.edu}
+
+Other contributors:
+\itemize{
+  \item Niklaus J. Grunwald \email{grunwaln@science.oregonstate.edu} [thesis advisor, contributor]
+}
+
+}
