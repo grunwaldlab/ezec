@@ -24,7 +24,7 @@ Introduction
 
 The package EZEC stands for Easy Effective Concentration. This package was 
 designed to be a simple wrapper for the functions `drm()` and `ED()` in the 
-[*drc*](http://cran.r-project.org/package=drc) package. It provides the function
+[*drc*](https://cran.r-project.org/package=drc) package. It provides the function
 `EC_table()` that will first fit a model to your data and then calculate
 effective concentrations from that model over several samples arranged in a data
 frame. In this tutorial, I will give a couple of short examples of how you can 
