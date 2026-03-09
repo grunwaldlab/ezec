@@ -1,6 +1,6 @@
 Package: ezec
 Title: Easy Interface to Effective Concentration Calculations
-Version: 1.0.1
+Version: 1.0.2
 Authors@R: c(person(c("Zhian", "N."), "Kamvar", role = c("cre", "aut"), email =
          "zkamvar@gmail.com"),
          person(c("Niklaus", "J."), "Grunwald", role = c("ths", "ctb"), email =

@@ -1,10 +1,15 @@
-ezec 1.0.1
+ezec 1.0.2
 ==========
 
 CRAN MAINTENANCE
 ----------------
 
 * old dplyr patterns have been deprecated
+
+ezec 1.0.1
+==========
+
+* New maintainer email address
 
 ezec 1.0.0
 ==========
