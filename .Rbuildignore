@@ -3,3 +3,5 @@
 ^\.travis\.yml$
 ^CONDUCT\.md$
 ^cran-comments\.md$
+^air.toml$
+^CRAN-SUBMISSION$

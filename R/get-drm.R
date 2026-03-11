@@ -21,27 +21,36 @@
 #'   catch errors generated due to non-finite responses. When these are
 #'   encounterd, a message that the model was not evaluated will be printed to
 #'   the screen and NA will be returned.
-get_drm <- function(x, form = NULL,
-                    model = c("LL.3", "LL.4", "W1.4", "W2.4"), idcol = "ID"){
+get_drm <- function(
+  x,
+  form = NULL,
+  model = c("LL.3", "LL.4", "W1.4", "W2.4"),
+  idcol = "ID"
+) {
   ARGS <- c("LL.3", "LL.4", "W1.4", "W2.4")
   model <- match.arg(model, ARGS)
-  if (model == "LL.3"){
-    mod.names <- c("Slope", "Upper Limit", "ED50" )
+  if (model == "LL.3") {
+    mod.names <- c("Slope", "Upper Limit", "ED50")
   } else {
-    mod.names <- c("Slope", "Lower Limit", "Upper Limit", "ED50" )
+    mod.names <- c("Slope", "Lower Limit", "Upper Limit", "ED50")
   }
-  if (is.null(form)){
+  if (is.null(form)) {
     the_call <- match.call()
     the_call[["form"]] <- response ~ dose
     the_call <- utils::capture.output(print(the_call))
     msg <- paste("please supply a formula.\n\nExample:\n\t", the_call)
     stop(msg)
   }
-  MODEL <- match.fun(model)
-  res <- tryCatch(drc::drm(form, data = x,
-                           fct = MODEL(names = mod.names),
-                           na.action = na.omit),
-                  error = function(e) cat("Not evaluated:", x[[idcol]][1], "\n"),
-                  finally = cat(""))
+  MODEL <- get(model, envir = asNamespace("drc"))
+  res <- tryCatch(
+    drc::drm(
+      form,
+      data = x,
+      fct = MODEL(names = mod.names),
+      na.action = na.omit
+    ),
+    error = function(e) cat("Not evaluated:", x[[idcol]][1], "\n"),
+    finally = cat("")
+  )
   return(res)
 }

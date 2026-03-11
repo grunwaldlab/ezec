@@ -27,4 +27,3 @@ This function is a wrapper for \code{\link[drc]{ED}}.
 Zhian N. Kamvar
 }
 \keyword{internal}
-
